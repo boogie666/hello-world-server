@@ -1,8 +1,10 @@
 package ro.itschool.helloWorldServer;
 
-import ro.itschool.helloWorldServer.json.JSONNumber;
-import ro.itschool.helloWorldServer.json.JSONObject;
-import ro.itschool.helloWorldServer.json.JSONString;
+import ro.itschool.helloWorldServer.question.ConstantQuestionRepo;
+import ro.itschool.helloWorldServer.question.JSONQuestionSerializer;
+import ro.itschool.helloWorldServer.question.QuestionHandler;
+import ro.itschool.helloWorldServer.router.Router;
+import ro.itschool.server.Server;
 
 public class Main {
 
@@ -12,10 +14,10 @@ public class Main {
 	private static final String CSS = "/css/\\S*";
 
 	public static void main(String[] args) {
-		JSONObject obj = new JSONObject();
-		obj.put("nume", new JSONString("Boogie"));
-		obj.put("varsta", new JSONNumber(30));
+		Router r = new Router();
+		r.addRoute("/questions/\\S+", new QuestionHandler(new ConstantQuestionRepo(), new JSONQuestionSerializer()));
 		
-		System.out.println(obj);
+		Server s = new Server(8080, r);
+		s.start();
 	}
 }

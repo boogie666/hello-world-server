@@ -11,13 +11,41 @@ public class JSONArray implements JSONValue {
 	}
 
 	public JSONArray add(JSONValue v) {
-		this.values.add(v);
+		if (v == null) {
+			this.values.add(JSONNull.Value);
+		} else {
+			this.values.add(v);
+		}
 		return this;
+	}
+
+	public JSONArray add(String v) {
+		return this.add(new JSONString(v));
+	}
+
+	public JSONArray add(double v) {
+		return this.add(new JSONNumber(v));
+	}
+
+	public JSONArray add(int v) {
+		return this.add(new JSONNumber(v));
+	}
+
+	public JSONArray add(boolean v) {
+		return this.add(new JSONBoolean(v));
 	}
 
 	public JSONArray remove(JSONValue v) {
 		this.values.remove(v);
 		return this;
+	}
+
+	public static JSONArray from(List<JSONValue> values) {
+		JSONArray arr = new JSONArray();
+		for (JSONValue v : values) {
+			arr.add(v);
+		}
+		return arr;
 	}
 
 	@Override
@@ -31,4 +59,5 @@ public class JSONArray implements JSONValue {
 		}
 		return "[" + stuff + "]";
 	}
+
 }

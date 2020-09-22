@@ -11,5 +11,4 @@ public class JSONNumber implements JSONValue{
 	public String toString() {
 		return String.valueOf(this.value);
 	}
-
 }

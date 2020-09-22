@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class JSONObject implements JSONValue {
+public class JSONObject implements JSONValue{
 
 	private final Map<JSONString, JSONValue> values;
 
@@ -12,14 +12,33 @@ public class JSONObject implements JSONValue {
 		values = new HashMap<JSONString, JSONValue>();
 	}
 
-	public JSONObject put(String key, JSONValue value) {
-		this.values.put(new JSONString(key), value);
+	public JSONObject put(JSONString key, JSONValue value) {
+		if (value == null) {
+			this.values.put(key, JSONNull.Value);
+		} else {
+			this.values.put(key, value);
+		}
 		return this;
 	}
+
+	public JSONObject put(String key, JSONValue value) {
+		return this.put(new JSONString(key), value);
+	}
+
+	public JSONObject put(String key, String value) {
+		return this.put(key, new JSONString(value));
+	}
+
+	public JSONObject put(String key, boolean value) {
+		return this.put(key, new JSONBoolean(value));
+	}
+
+	public JSONObject put(JSONString key, double value) {
+		return this.put(key, new JSONNumber(value));
+	}
 	
-	public JSONObject put(JSONString key, JSONValue value) {
-		this.values.put(key, value);
-		return this;
+	public JSONObject put(String key, int value) {
+		return this.put(key, new JSONNumber(value));
 	}
 
 	public JSONObject remove(String key) {
@@ -46,5 +65,7 @@ public class JSONObject implements JSONValue {
 		}
 		return "{" + stuff + "}";
 	}
+
+	
 
 }

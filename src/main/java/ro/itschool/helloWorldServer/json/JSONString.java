@@ -36,8 +36,6 @@ public class JSONString implements JSONValue{
 		return true;
 	}
 
-
-
 	@Override
 	public String toString() {
 		String result = this.value;

@@ -9,6 +9,18 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Hello World Server</name>
 	<description>A Simple Hello World Server App</description>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	
+	
+	<repositories>
+		<repository>
+			<id>boogies-repo</id>
+			<url>https://gitlab.com/boogie666/artifacts/-/raw/master</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -16,8 +28,8 @@
 			<artifactId>server</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-	</dependencies> 
-	
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
